@@ -33,7 +33,7 @@ export function DroneHero() {
     y.set(Math.max(-90, Math.min(75, (event.clientY-bounds.top-bounds.height*.43)*.65)));
   }
   return <section className="drone-hero">
-    <div className="drone-copy"><p className="eyebrow">T.E.R.R.A. / Environmental robotics</p><h1>New ground.<br/><em>New perspective.</em></h1><p>Exploring how robotics and algae-based biological processes could support the restoration of degraded land.</p><div className="drone-actions"><a href="#/technology">Explore the technology <span aria-hidden="true">↗</span></a><a href="#/science">Our scientific approach</a></div><span className="drone-stage">Early-stage concept · Designed to be tested</span></div>
+    <div className="drone-copy"><p className="eyebrow">T.E.R.R.A. / An idea for India’s degraded land</p><h1>A new beginning<br/><em>for degraded land.</em></h1><p>A student-led concept exploring suitable algae or cyanobacteria, controlled cultivation and practical application methods for land restoration research.</p><div className="drone-actions"><a href="#/technology">Explore the concept <span aria-hidden="true">↗</span></a><a href="#/science">See how it could work</a></div><span className="drone-stage">Concept stage · Cultivation and drone delivery under evaluation</span></div>
     <div ref={arena} className={`drone-arena${airborne ? ' airborne' : ''}`} onPointerMove={follow} onPointerLeave={() => {x.set(0); y.set(0);}}>
       <div className="flight-grid" aria-hidden="true"/><div className="flight-orbit" aria-hidden="true"/>
       <motion.div className="drone-shadow" aria-hidden="true" initial={false} animate={{scale:airborne?.65:1,opacity:airborne?.22:.6}} transition={{duration:1.8}}/>

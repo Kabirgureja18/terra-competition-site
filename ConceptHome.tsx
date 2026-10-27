@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { CreatorCard } from './CreatorCard';
+import { ScrollSplitCard } from './ScrollSplitCard';
 import './concept-home.css';
 
 export const researchSources = [
@@ -18,7 +19,7 @@ function CultureDiagram() { return <figure className="culture-diagram"><svg view
 
 export function ConceptHome() {
   const reduced = useReducedMotion();
-  return <div className="concept-home"><section className="quiet-hero"><p className="eyebrow">T.E.R.R.A. / A student-led research concept</p><h1>A new beginning<br/>for <em>degraded land.</em></h1><p>Exploring how suitable algae or cyanobacteria could support land restoration in India—through careful cultivation, controlled trials and measurable evidence.</p><div><a href="#/technology">Explore the concept ↗</a><a href="#/science">See how it could work</a></div><span>Concept stage · Research before deployment</span></section>
+  return <div className="concept-home"><ScrollSplitCard/>
     <section className="land-problem"><div><p className="eyebrow">The ground beneath the idea</p><h2>Restoration starts<br/>with understanding<br/><em>what was lost.</em></h2></div><div><p className="large-copy">Land degradation in India takes different forms. Soil erosion, vegetation loss and changing soil conditions call for local answers.</p><p>Maps can help identify affected areas, but a treatment still needs on-site assessment. T.E.R.R.A. begins with a question: could selected biological inputs support restoration in suitable conditions?</p><a className="research-link" href={researchSources[0].href} target="_blank" rel="noreferrer">Explore ISRO’s land degradation atlases ↗</a><span className="evidence-tag">Context / established research</span></div></section>
     <section className="living-system"><div><p className="eyebrow">The proposed idea</p><h2>Small organisms.<br/><em>Careful experiments.</em></h2><p>T.E.R.R.A. proposes cultivating suitable algae or cyanobacteria, preparing a defined biological input, and testing its application to degraded soil.</p><p>Algae and cyanobacteria are different biological groups. Organism choice, soil, climate and treatment method all matter. A promising scientific rationale does not establish that this particular system will work.</p><span className="evidence-tag">Concept / requires validation</span><a href="#/science" className="research-link">Read the science and safeguards ↗</a></div><CultureDiagram/></section>
     <section className="concept-process" id="how-it-works"><div className="section-heading"><div><p className="eyebrow">How it could work</p><h2>From culture<br/>to controlled trial.</h2></div><p>The cultivation unit and aerial delivery platform remain design concepts. The simplest effective application method should be established before adding robotics.</p></div><div className="process-path">{steps.map(([title,copy],i)=><article key={title}><span className="process-number">0{i+1}</span><h3>{title}</h3><p>{copy}</p></article>)}</div></section>

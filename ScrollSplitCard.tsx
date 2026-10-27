@@ -1,3 +1,4 @@
+import { GenerateLink } from './GenerateLink';
 import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion, useSpring } from 'framer-motion';
 import { TextMorph } from './TextMorph';
@@ -49,7 +50,7 @@ export function ScrollSplitCard() {
         <p className="hero-kicker">A new approach to degraded land</p>
         <h1 id="terra-hero-title"><KineticTextReveal text="Regenerating land."/><br/><em><TextMorph words={heroWords} interval={3000} morphDuration={680}/></em></h1>
         <p>Exploring the meeting point of environmental science,<br className="desktop-break"/> robotics and algae-based biological processes.</p>
-        <a href="#/technology" className="hero-explore">Explore the technology <span aria-hidden="true">↗</span></a>
+        <GenerateLink href="#/technology">Explore the technology</GenerateLink>
       </motion.div>
       <motion.div className="split-panels" style={{ scale: reduced ? 1 : scale, y: reduced ? 0 : cardsY }}>
         {cards.map((card, i) => <motion.article className="split-panel" key={card.label} style={{ x: reduced ? 0 : i === 0 ? left : i === 2 ? right : 0, rotateY: reduced ? 0 : rotateY, rotateZ: reduced ? 0 : i === 0 ? rotateL : i === 2 ? rotateR : 0 }}>

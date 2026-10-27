@@ -3,9 +3,9 @@ import './editorial-scroll.css';
 
 const cards = [
   { kicker: '01 — The Belief', title: 'Create Without Fear', description: 'A bold space for ideas to rise, move, and become visible without waiting for permission.', background: '#000000', color: '#ffffff' },
-  { kicker: '02 — The Mission', title: 'Art First Always', description: 'Creativity leads. We put the work, the artist, and the freedom to express something original at the centre.', background: '#1117ff', color: '#ffffff' },
-  { kicker: '03 — The Method', title: 'Build Loud Ideas', description: 'Turn instinct into action. Experiment, collaborate, and give your ideas the space to become impossible to ignore.', background: '#f2f0e8', color: '#050505' },
-  { kicker: '04 — The Future', title: 'No More Limits', description: 'An open invitation to artists, makers, and anyone ready to push creative expression further.', background: '#ff3f00', color: '#ffffff' },
+  { kicker: '02 — The Mission', title: 'Art First Always', description: 'Every card arrives like a statement, cutting through the page with strong motion and clean contrast.', background: '#1117ff', color: '#ffffff' },
+  { kicker: '03 — The Method', title: 'Build Loud Ideas', description: 'Smooth scroll movement, cinematic angles, and bold typography make each section feel alive.', background: '#f2f0e8', color: '#050505' },
+  { kicker: '04 — The Future', title: 'No More Limits', description: 'A premium scroll experience designed for portfolios, agencies, artists, and experimental landing pages.', background: '#ff3f00', color: '#ffffff' },
 ];
 const clamp = (value: number) => Math.min(1, Math.max(0, value));
 const lerp = (start: number, end: number, amount: number) => start + (end - start) * amount;
@@ -42,9 +42,9 @@ export function EditorialScroll() {
       }
       cardRefs.current.forEach((card, index) => {
         if (!card) return;
-        const raw = clamp((progress - (.07 + index * .22)) / .18);
+        const raw = clamp((progress - (.08 + index * .215)) / .22);
         const eased = easeOut(raw);
-        card.style.transform = `translate3d(${10 * (1 - eased)}vw,${112 * (1 - eased)}vh,0) rotate(${-7 * (1 - easeInOut(raw))}deg) scale(${1.05 - .05 * eased})`;
+        card.style.transform = `translate3d(${10 * (1 - eased)}vw,${112 * (1 - eased)}vh,0) rotate(${-7.5 * (1 - easeInOut(raw))}deg) scale(${1.05 - .05 * eased})`;
         card.style.opacity = raw === 0 ? '0' : String(.4 + .6 * eased);
         card.style.filter = `blur(${3 * (1 - eased)}px)`;
       });
@@ -103,5 +103,6 @@ export function EditorialScroll() {
         </article>)}</div>
       </div>
     </section>
+    <div className="editorial-after" aria-hidden="true"/>
   </main>;
 }

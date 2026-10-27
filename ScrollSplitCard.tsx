@@ -1,5 +1,8 @@
 import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion, useSpring } from 'framer-motion';
+import { TextMorph } from './TextMorph';
+
+const heroWords = ['Intelligently.', 'Responsibly.', 'Scientifically.'];
 
 const cards = [
   { title: 'Understand the ground.', label: 'Environmental science', description: 'Site conditions come first. Investigate soil, climate and biological compatibility before proposing a treatment.', href: '#/science', color: '#d8decb', ink: '#18241b' },
@@ -43,7 +46,7 @@ export function ScrollSplitCard() {
       <div className="hero-topline"><span>Environmental robotics</span><span>Early-stage research concept</span></div>
       <motion.div className="hero-intro" style={{ opacity: reduced ? 1 : titleOpacity }}>
         <p className="hero-kicker">A new approach to degraded land</p>
-        <h1 id="terra-hero-title">Regenerating land.<br/><em>Intelligently.</em></h1>
+        <h1 id="terra-hero-title">Regenerating land.<br/><em><TextMorph words={heroWords} interval={3000} morphDuration={680}/></em></h1>
         <p>Exploring the meeting point of environmental science,<br className="desktop-break"/> robotics and algae-based biological processes.</p>
         <a href="#/technology" className="hero-explore">Explore the technology <span aria-hidden="true">↗</span></a>
       </motion.div>

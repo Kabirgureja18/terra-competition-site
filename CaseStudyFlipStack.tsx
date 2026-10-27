@@ -1,6 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { motion, useMotionTemplate, useScroll, useTransform, type MotionValue } from 'framer-motion';
 import './flip-stack.css';
+
+const TextType = lazy(() => import('./TextType'));
 
 const stages = [
   { status: 'Completed · concept framing', title: 'Start with a question.', description: 'Problem definition, project identity and an initial system narrative. This establishes the concept, not its effectiveness.', color: '#dce3cf', ink: '#203b2b', label: 'CONCEPT / FRAMED', detail: 'What would restoration need here?' },
@@ -41,7 +43,7 @@ export function CaseStudyFlipStack() {
   }, []);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
   return <section className={`roadmap-flip${staticLayout ? ' is-static' : ''}`} aria-label="Project development stages">
-    <div className="flip-intro"><p className="eyebrow">Five stages · evidence at every gate</p><p>{staticLayout ? 'Explore the development stages below.' : 'Scroll to explore the development stages ↓'}</p></div>
+    <div className="flip-intro"><p className="eyebrow">Five stages · evidence at every gate</p>{staticLayout ? <p>Explore the development stages below.</p> : <Suspense fallback={<p>Scroll to explore the development stages ↓</p>}><TextType as="p" className="flip-typing" text="Scroll to explore the development stages ↓" typingSpeed={35} typeEffect="fade" mistakes={0} loop={false} cursorStyle="bar" cursorGlide showCursor startOnVisible/></Suspense>}</div>
     <div ref={ref} className="flip-track"><div className="flip-sticky"><div className="flip-deck">{stages.map((stage, index) => <StageCard key={stage.title} index={index} progress={scrollYProgress}/>)}</div><p className="flip-end">No fixed launch date. The evidence sets the pace.</p></div></div>
   </section>;
 }

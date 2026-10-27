@@ -1,5 +1,5 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { motion, useScroll, useTransform, useReducedMotion, useSpring } from 'framer-motion';
 
 const cards = [
   { title: 'Understand the ground.', label: 'Environmental science', description: 'Site conditions come first. Investigate soil, climate and biological compatibility before proposing a treatment.', href: '#/science', color: '#d8decb', ink: '#18241b' },
@@ -11,6 +11,9 @@ const image = 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=85
 export function ScrollSplitCard() {
   const ref = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
+  const [pointerInside, setPointerInside] = useState(false);
+  const x = useSpring(0, { stiffness: 200, damping: 18, mass: 1 });
+  const y = useSpring(0, { stiffness: 200, damping: 18, mass: 1 });
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
   const left = useTransform(scrollYProgress, [0, .35, .75], [0, -38, -18]);
   const right = useTransform(scrollYProgress, [0, .35, .75], [0, 38, 18]);
@@ -24,7 +27,19 @@ export function ScrollSplitCard() {
   const captionOpacity = useTransform(scrollYProgress, [.72, .88], [0, 1]);
 
   return <section ref={ref} className={`scroll-hero${reduced ? ' motion-off' : ''}`} aria-labelledby="terra-hero-title">
-    <div className="split-sticky">
+    <div className="split-sticky" onPointerEnter={event => {
+      if (event.pointerType !== 'mouse' || reduced) return;
+      const bounds = event.currentTarget.getBoundingClientRect();
+      x.jump(event.clientX - bounds.left);
+      y.jump(event.clientY - bounds.top);
+      setPointerInside(true);
+    }} onPointerMove={event => {
+      if (event.pointerType !== 'mouse' || reduced) return;
+      const bounds = event.currentTarget.getBoundingClientRect();
+      x.set(event.clientX - bounds.left);
+      y.set(event.clientY - bounds.top);
+    }} onPointerLeave={() => setPointerInside(false)}>
+      {!reduced && <motion.div className="hero-pointer" aria-hidden="true" style={{ x, y, opacity: pointerInside ? 1 : 0 }}><span/></motion.div>}
       <div className="hero-topline"><span>Environmental robotics</span><span>Early-stage research concept</span></div>
       <motion.div className="hero-intro" style={{ opacity: reduced ? 1 : titleOpacity }}>
         <p className="hero-kicker">A new approach to degraded land</p>

@@ -7,6 +7,7 @@ import { CreatorCard } from './CreatorCard';
 import { DroneHero } from './DroneHero';
 import { ConceptHome } from './ConceptHome';
 import { MotionConfig } from 'framer-motion';
+import './refinement.css';
 
 type Status = 'Established knowledge' | 'Proposed design' | 'Hypothesis to test' | 'Future plan' | 'In development';
 type Source = { name: string; url: string };
